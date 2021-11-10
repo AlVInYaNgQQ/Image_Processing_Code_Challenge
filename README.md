@@ -1,16 +1,27 @@
 # Image_Processing_Code_Challenge
 
 Step 1. Clone project
+----
 git clone "project"
+----
 
 Step 2. Install module
+-----
+
 npm init
-npm I
+----
+
+npm i
+----
 
 Step 3. Running test
+----
+
 npm test
+----
 
 ps. Check folder's "_*.jpg" 
+----
 
 
 
