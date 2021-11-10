@@ -13,8 +13,11 @@ http.createServer(function(req, res) {
   if (req.method == 'GET') {
     if (_pathname == '/homework.cgi') {
       // console.log(_pathname);
-      if(_query.image_url) {
-        request.get(`${_query.image_url}`, function (_err, _res, _body) {
+      let _url = _query.image_url || 'https://images.unsplash.com/photo-1631086459990-06bc4d7ad6cf';
+      // console.log(_query.image_url);
+      // console.log(_url);
+      if(_url) {
+        request.get(`${_url}`, function (_err, _res, _body) {
           // request.get('https://images.unsplash.com/photo-1631086459990-06bc4d7ad6cf', function (_err, _res, _body) {
           sharp(Buffer.from(_body))
           .flip(true)
@@ -48,8 +51,6 @@ http.createServer(function(req, res) {
         _buff = Buffer.concat([_buff, chunk]);
       });
       readStream.on('end', () => {
-        // console.log('end');
-        // console.log(_buff);
         sharp(Buffer.from(_buff))
         .flip(true)
         .flop(true)
@@ -57,14 +58,6 @@ http.createServer(function(req, res) {
           // readStream.pipe(res);
           res.end(buffer);
         });
-      });
-      
-      readStream.on('close', () => {
-        console.log('close');
-      });
-    
-      readStream.on('error', function(err) {
-        res.end(err);
       });
     };
   };
